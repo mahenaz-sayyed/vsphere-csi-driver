@@ -66,11 +66,13 @@ func validateGuestClusterCreateVolumeRequest(ctx context.Context, req *csi.Creat
 	params := req.GetParameters()
 	for param := range params {
 		paramName := strings.ToLower(param)
-		if paramName != common.AttributeSupervisorStorageClass {
+		if !(paramName == common.AttributeSupervisorStorageClass || paramName == common.AttributeIsCeph) {
 			msg := fmt.Sprintf("Volume parameter %s is not a valid GC CSI parameter", param)
 			return status.Error(codes.InvalidArgument, msg)
 		}
-		supervisorStorageClass = req.Parameters[param]
+		if paramName == common.AttributeSupervisorStorageClass {
+			supervisorStorageClass = req.Parameters[param]
+		}
 	}
 	// Validate if the req contains non-empty common.AttributeSupervisorStorageClass
 	if supervisorStorageClass == "" {

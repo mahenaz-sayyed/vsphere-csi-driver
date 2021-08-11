@@ -55,6 +55,10 @@ const (
 	// For example: StorageClassName: "silver".
 	AttributeSupervisorStorageClass = "svstorageclass"
 
+	//This parameter is to see if the SC is for CEPH cluster
+	//For Example cephC = "true".
+	AttributeIsCeph = "cephC"
+
 	// AttributeFsType represents filesystem type in the Storage Classs.
 	// For Example: FsType: "ext4".
 	AttributeFsType = "fstype"
