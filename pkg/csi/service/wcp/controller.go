@@ -527,13 +527,13 @@ func (c *controller) CreateVolume(ctx context.Context, req *csi.CreateVolumeRequ
 		} else {
 			volumeType = prometheus.PrometheusFileVolumeType
 		}
-		// Validate create request.
-		// err := validateWCPCreateVolumeRequest(ctx, req, isBlockRequest)
-		// if err != nil {
-		// 	msg := fmt.Sprintf("Validation for CreateVolume Request: %+v has failed. Error: %+v", *req, err)
-		// 	log.Error(msg)
-		// 	return nil, err
-		// }
+		Validate create request.
+		err := validateWCPCreateVolumeRequest(ctx, req, isBlockRequest)
+		if err != nil {
+			msg := fmt.Sprintf("Validation for CreateVolume Request: %+v has failed. Error: %+v", *req, err)
+			log.Error(msg)
+			return nil, err
+		}
 
 		if !isBlockRequest {
 			if !commonco.ContainerOrchestratorUtility.IsFSSEnabled(ctx, common.FileVolume) ||

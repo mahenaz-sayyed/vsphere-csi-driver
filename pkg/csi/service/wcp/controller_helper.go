@@ -51,6 +51,7 @@ import (
 func validateCreateBlockReqParam(paramName, value string) bool {
 	return paramName == common.AttributeStoragePolicyID ||
 		paramName == common.AttributeFsType ||
+		paramName == common.AttributeIsCeph ||
 		paramName == common.AttributeStoragePool ||
 		(paramName == common.AttributeHostLocal && strings.EqualFold(value, "true"))
 }
@@ -65,6 +66,7 @@ const (
 // Returns true if the parameter name is valid, false otherwise.
 func validateCreateFileReqParam(paramName, value string) bool {
 	return paramName == common.AttributeStoragePolicyID ||
+		paramName == common.AttributeIsCeph ||
 		paramName == common.AttributeFsType
 }
 
