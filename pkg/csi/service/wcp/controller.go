@@ -514,8 +514,8 @@ func (c *controller) CreateVolume(ctx context.Context, req *csi.CreateVolumeRequ
 
 		var cephCval string
 		for paramName := range req.Parameters {
-			param := strings.ToLower(paramName)
-			if param == common.AttributeIsCeph {
+			//param := strings.ToLower(paramName)
+			if paramName == common.AttributeIsCeph {
 				cephCval = req.Parameters[paramName]
 				log.Infof("The value of special ceph parameter %s", cephCval)
 			}
