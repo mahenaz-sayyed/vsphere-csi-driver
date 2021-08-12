@@ -512,6 +512,15 @@ func (c *controller) CreateVolume(ctx context.Context, req *csi.CreateVolumeRequ
 		log := logger.GetLogger(ctx)
 		log.Infof("CreateVolume: called with args %+v", *req)
 
+		var cephCval string
+		for paramName := range req.Parameters {
+			param := strings.ToLower(paramName)
+			if param == common.AttributeIsCeph {
+				cephCval = req.Parameters[paramName]
+				log.Infof("The value of special ceph parameter %+v", cephCval)
+			}
+		}
+
 		isBlockRequest := !common.IsFileVolumeRequest(ctx, req.GetVolumeCapabilities())
 		if isBlockRequest {
 			volumeType = prometheus.PrometheusBlockVolumeType
@@ -519,12 +528,12 @@ func (c *controller) CreateVolume(ctx context.Context, req *csi.CreateVolumeRequ
 			volumeType = prometheus.PrometheusFileVolumeType
 		}
 		// Validate create request.
-		err := validateWCPCreateVolumeRequest(ctx, req, isBlockRequest)
-		if err != nil {
-			msg := fmt.Sprintf("Validation for CreateVolume Request: %+v has failed. Error: %+v", *req, err)
-			log.Error(msg)
-			return nil, err
-		}
+		// err := validateWCPCreateVolumeRequest(ctx, req, isBlockRequest)
+		// if err != nil {
+		// 	msg := fmt.Sprintf("Validation for CreateVolume Request: %+v has failed. Error: %+v", *req, err)
+		// 	log.Error(msg)
+		// 	return nil, err
+		// }
 
 		if !isBlockRequest {
 			if !commonco.ContainerOrchestratorUtility.IsFSSEnabled(ctx, common.FileVolume) ||
