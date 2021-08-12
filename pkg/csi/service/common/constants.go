@@ -57,7 +57,7 @@ const (
 
 	//This parameter is to see if the SC is for CEPH cluster
 	//For Example cephC = "true".
-	AttributeIsCeph = "cephC"
+	AttributeIsCeph = "cephc"
 
 	// AttributeFsType represents filesystem type in the Storage Classs.
 	// For Example: FsType: "ext4".
