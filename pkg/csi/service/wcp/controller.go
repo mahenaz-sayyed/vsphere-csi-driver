@@ -32,7 +32,6 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	v1 "k8s.io/api/core/v1"
-
 	"sigs.k8s.io/vsphere-csi-driver/pkg/common/prometheus"
 
 	cnsvolume "sigs.k8s.io/vsphere-csi-driver/pkg/common/cns-lib/volume"
@@ -534,8 +533,8 @@ func (c *controller) CreateVolume(ctx context.Context, req *csi.CreateVolumeRequ
 			}
 		}
 
-		// if (cephCval == "t")
-		// k8sClient, err := k8s.NewClient(ctx)
+		//if (cephCval == "t")
+		//k8sClient, err := k8s.NewClient(ctx);
 
 		if !isBlockRequest {
 			if !commonco.ContainerOrchestratorUtility.IsFSSEnabled(ctx, common.FileVolume) ||
